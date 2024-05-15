@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  conda-service:
+    image: cuda-python-env
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ~/notebooks:/notebooks          # mounts the notebooks directory. Check entrypoint.sh
+      - ./entrypoint.sh:/entrypoint.sh  # mounts the entrypoint script.
+    command: /bin/bash /entrypoint.sh  
+    ports:
+      - "9090:9090"                     # forwards port 9090 on the host to port 9090 in the container. 
+                                        # Check entrypoint.sh
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
