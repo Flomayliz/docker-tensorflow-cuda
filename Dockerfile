@@ -51,7 +51,7 @@ RUN --mount=type=cache,mode=0777,target=/home/${USER}/.cache,uid=${UID},gid=${GI
 
 # Install tensorflow
 RUN --mount=type=cache,mode=0777,target=/home/${USER}/.cache,uid=${UID},gid=${GID} \
-    pip install tensorflow[and-cuda] --default-timeout=100
+    pip install tensorflow[and-cuda] tensorflow_datasets --default-timeout=100
 
 # Initialize jupyter
 RUN --mount=type=cache,mode=0777,target=/home/${USER}/.cache,uid=${UID},gid=${GID} \
